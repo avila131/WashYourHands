@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1011412796131",
+    "firebase_url": "https://resiliencia-bbb47.firebaseio.com",
+    "project_id": "resiliencia-bbb47",
+    "storage_bucket": "resiliencia-bbb47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011412796131:android:3925df8418aac010693bd6",
+        "android_client_info": {
+          "package_name": "com.example.resiliencia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011412796131-jbsae9fo4ql668isenc7577q4ja2f0k5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.resiliencia",
+            "certificate_hash": "9dbf6bdc1c1cd54f3e478c5e1eb249d59ac378f8"
+          }
+        },
+        {
+          "client_id": "1011412796131-8qjr6bu119t2jg1ftcgfn29210nc4n2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcwMWJb83Wl-VZbAmDWBnLykknTMYV3KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011412796131-8qjr6bu119t2jg1ftcgfn29210nc4n2q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
