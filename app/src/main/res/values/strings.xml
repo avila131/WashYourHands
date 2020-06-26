@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Wash your hands!</string>
 
-    <string-array name="ocalidades">
+    <string-array name="localidades">
         <item>Usaquén</item>
         <item>Chapinero</item>
         <item>Santa Fe</item>

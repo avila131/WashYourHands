@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    >
+
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="271dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/v_flipper"/>
+
+
+
 
 
     <TextView
@@ -36,14 +44,11 @@
         android:layout_toEndOf="@+id/button_start_pause"
         android:text="reset"
         android:visibility="invisible"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:layout_toRightOf="@+id/button_start_pause"
+        android:layout_marginLeft="-86dp" />
 
-    <ImageView
-        android:id="@+id/fotoDavid"
-        android:layout_width="500dp"
-        android:layout_height="300dp"
-        android:src="@drawable/foto1"
-        />
+
     
     
 
@@ -56,7 +61,6 @@
         app:itemIconTint="@drawable/selector"
         app:menu="@menu/menu_navigation"
         android:layout_alignParentBottom="true"/>
-
 
 
 

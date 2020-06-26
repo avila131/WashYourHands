@@ -2,6 +2,19 @@ package com.example.resiliencia;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -31,9 +43,10 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.LogRecord;
 import android.os.Bundle;
 
-public class Principal extends AppCompatActivity {
+public class Principal extends AppCompatActivity{
 
     EditText texto_localidad, numeroLavadoManos;
     Button agregarValores;
@@ -41,27 +54,24 @@ public class Principal extends AppCompatActivity {
     Persona persona;
 
 
+    private ProgressBar p;
+    private int prgStatus = 0;
+    private TextView t;
+    private Handler handler = new Handler();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-         /*
-            Manuel, acá puede meter el código de la progress bar
 
-                                                  .----.
-                              .---------. | == |
-                              |.-"""""-.| |----|
-                              ||       || | == |
-                              ||       || |----|
-                              |'-.....-'| |::::|
-                              `"")---(""` |___.|
-                             /:::::::::::\" _  "
-                            /:::=======:::\`\`\
-                            `"""""""""""""`  '-'
 
-            No tocar el código que funciona :)
 
-         */
+        p = (ProgressBar) findViewById(R.id.p);
+        t = (TextView) findViewById(R.id.t);
+
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -89,6 +99,7 @@ public class Principal extends AppCompatActivity {
         // Inset data to database
         texto_localidad = (EditText) findViewById(R.id.localidadEditText);
         numeroLavadoManos = (EditText) findViewById(R.id.numberoLavadoEditText);
+
         agregarValores = (Button) findViewById(R.id.btnInsert);
         persona = new Persona();
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
@@ -100,10 +111,58 @@ public class Principal extends AppCompatActivity {
                 persona.setNumeroLavados(numeroLavado);
 
                 reff.push().setValue(persona);
-                Toast.makeText(Principal.this, "correctly processewd", Toast.LENGTH_LONG).show();
+                prgStatus = 0;
+                Toast.makeText(Principal.this, "correctly processed", Toast.LENGTH_LONG).show();
+
+                int val = numeroLavado;
+                new Thread(new Runnable() {
+
+                    public void run() {
+                        int numeroLavados = Integer.parseInt(numeroLavadoManos.getText().toString().trim());
+
+                        while (prgStatus < 100) {
+                            if (numeroLavados == 0)
+                            {
+                                prgStatus = 0;
+                                break;
+                            }
+
+                            prgStatus += 1;
+
+                            handler.post(new Runnable() {
+                                public void run() {
+                                    p.setProgress(prgStatus);
+                                    t.setText(prgStatus+"/"+p.getMax());
+                                }
+                            });
+                            try {
+
+                                Thread.sleep(40);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            //int totalLavados = Integer.parseInt(numeroLavadoManos.getText().toString().trim());
+
+
+                            if (prgStatus == numeroLavados*20)
+                                break;
+
+
+                        }
+                    }
+                }).start();
+
 
             }
         });
 
+
+
+
+
+
     }
+
+
+
 }
